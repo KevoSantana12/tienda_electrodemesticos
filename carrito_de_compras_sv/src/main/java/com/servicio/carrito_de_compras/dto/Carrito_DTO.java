@@ -1,0 +1,15 @@
+package com.servicio.carrito_de_compras.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter @Setter
+public class Carrito_DTO {
+    List<Integer> idProductos;
+}
