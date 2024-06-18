@@ -1,5 +1,4 @@
 package com.servicio.productos_sv.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

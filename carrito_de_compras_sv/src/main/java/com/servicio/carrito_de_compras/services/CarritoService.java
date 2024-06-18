@@ -29,10 +29,13 @@ public class CarritoService implements ICarritoService{
         if (!carrito_dto.getIdProductos().isEmpty()) {
             String[] productos = new String[carrito_dto.getIdProductos().size()];
 
-            for (int id: carrito_dto.getIdProductos()) {
-            ProductosDTO producto = prodCRUD.getProducto(carrito_dto.getIdProductos().get(id));
-            productos[id] = producto.getNombre();
-            precioTotal = precioTotal + producto.getPrecio();
+            for (int i = 0; i < carrito_dto.getIdProductos().size(); i++){
+                ProductosDTO producto = prodCRUD.getProducto(carrito_dto.getIdProductos().get(i));
+
+                if (producto != null){
+                    productos[i] = producto.getNombre();
+                    precioTotal += producto.getPrecio();
+                }
             }
 
             Carrito carrito = new Carrito();
@@ -56,10 +59,13 @@ public class CarritoService implements ICarritoService{
             String[] productos = new String[carrito.getIdProductos().size()];
             double precioTotal = 0;
 
-            for (int id: carrito.getIdProductos()) {
-                ProductosDTO producto = prodCRUD.getProducto(carrito.getIdProductos().get(id));
-                productos[id] = producto.getNombre();
-                precioTotal = precioTotal + producto.getPrecio();
+            for (int i = 0; i < carrito.getIdProductos().size(); i++){
+                ProductosDTO producto = prodCRUD.getProducto(carrito.getIdProductos().get(i));
+
+                if (producto != null){
+                    productos[i] = producto.getNombre();
+                    precioTotal += producto.getPrecio();
+                }
             }
 
             carritoEdit.setLista_producto(productos);

@@ -1,16 +1,17 @@
 package com.servicio.carrito_de_compras.Controller;
 
 import com.servicio.carrito_de_compras.dto.Carrito_DTO;
+import com.servicio.carrito_de_compras.model.Carrito;
 import com.servicio.carrito_de_compras.services.CarritoService;
-import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 
-@Controller
+import java.util.List;
+
+
+@RestController
 @RequestMapping("/carrito")
 public class CarritoController {
     @Autowired
@@ -36,4 +37,31 @@ public class CarritoController {
         }
     }
 
+    @GetMapping("/get/all")
+    public List<Carrito> getAll(){
+        try {
+            return carCRUD.getAll();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @GetMapping("/get/{id}")
+    public Carrito getCarrito(@PathVariable int id){
+        try {
+            return carCRUD.getCarrito(id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<String> edit(@PathVariable int id, @RequestBody Carrito_DTO carrito_dto){
+        try {
+            carCRUD.edit(carrito_dto, id);
+            return ResponseEntity.status(HttpStatus.OK).body("Carrito editado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al editar el usuario");
+        }
+    }
 }
