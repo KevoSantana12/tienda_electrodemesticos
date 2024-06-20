@@ -6,6 +6,7 @@ import com.servicio.ventas.model.Venta;
 import com.servicio.ventas.repository.ICarritoRepository;
 import com.servicio.ventas.repository.IVentasRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class VentasServices implements IVentasServices {
 
     @Override
     @CircuitBreaker(name = "CARRITO-SV", fallbackMethod = "fallbackMethod")
+    @Retry(name = "CARRITO-SV")
     public void save(Ventas_DTO ventas_dto) {
         if (ventas_dto != null){
             Carrito_DTO carrito = carritoCRUD.getCarrito(ventas_dto.getId_carrito());
